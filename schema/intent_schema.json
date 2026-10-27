@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "INTENT_SCHEMA",
+  "type": "object",
+  "required": [
+    "mode",
+    "intent",
+    "task_type",
+    "summary",
+    "entities",
+    "proposed_action",
+    "confidence",
+    "source"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "mode": {
+      "enum": [
+        "point",
+        "speak",
+        "do"
+      ]
+    },
+    "intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_type": {
+      "enum": [
+        "explain",
+        "summarize",
+        "translate",
+        "draft_email",
+        "make_chart",
+        "log_record",
+        "unknown"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "proposed_action": {
+      "type": "object",
+      "required": [
+        "kind",
+        "auto_send"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "none",
+            "draft",
+            "render_image",
+            "write_local_record"
+          ]
+        },
+        "auto_send": {
+          "const": false
+        },
+        "detail": {
+          "type": "string"
+        }
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "source": {
+      "enum": [
+        "mock",
+        "vision_llm"
+      ]
+    },
+    "capture_entry": {
+      "enum": [
+        "point",
+        "capture_region"
+      ],
+      "description": "How the screenshot was taken. capture_region = Ask-key bypass for hard cases; not a fourth product feature."
+    }
+  }
+}
