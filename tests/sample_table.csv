@@ -1,7 +1,7 @@
-month,sales
-Jan,120
-Feb,135
-Mar,98
-Apr,160
-May,175
-Jun,190
+product,units,revenue_usd
+Notebook,420,12600
+Pens,180,2700
+Lamp,95,4750
+Chair,64,19200
+Monitor,48,14400
+Headset,210,8400

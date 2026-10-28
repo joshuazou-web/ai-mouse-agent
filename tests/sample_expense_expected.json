@@ -1,0 +1,29 @@
+{
+  "fixture": "tests/sample_receipt.txt",
+  "spoken_line_en": "Archive this expense.",
+  "spoken_line_zh": "归档报销",
+  "when": "Real vision only. Set OPENAI_API_KEY in the shell, then point at this receipt (or a screenshot of it). ./demo.sh does not read this file.",
+  "entities_vision_should_emit": [
+    {"type": "merchant", "value": "Northwind Cafe"},
+    {"type": "amount", "value": "26.91"},
+    {"type": "currency", "value": "USD"},
+    {"type": "date", "value": "2026-10-21"}
+  ],
+  "literals_copied_into_expenses_json": {
+    "merchant": "Northwind Cafe",
+    "amount": 26.91,
+    "currency": "USD",
+    "date": "2026-10-21"
+  },
+  "filled_by_do_not_by_the_receipt_footer": {
+    "note": "The intent string the model returns.",
+    "source_image": "Basename of the image passed to --image, or the screencapture file."
+  },
+  "on_the_receipt_not_separate_json_fields": [
+    {"item": "Espresso", "amount": 4.50},
+    {"item": "Avocado toast", "amount": 14.00},
+    {"item": "Oat latte", "amount": 6.25},
+    {"item": "Tax", "amount": 2.16},
+    {"item": "Subtotal", "amount": 24.75}
+  ]
+}

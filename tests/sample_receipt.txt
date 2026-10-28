@@ -1,0 +1,12 @@
+NORTHWIND CAFE
+128 Harbor Street, San Francisco
+
+Receipt 1842
+2026-10-21
+
+Espresso                 4.50
+Avocado toast           14.00
+Oat latte                6.25
+Subtotal                24.75
+Tax                      2.16
+Total USD               26.91
