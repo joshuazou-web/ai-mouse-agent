@@ -18,7 +18,7 @@ echo "=== 1/3 email draft (auto_send=false) ==="
 python -m src.pipeline.run --image tests/sample.png --transcript "回复并接受" --mode do --do
 echo
 echo "=== 2/3 chart PNG ==="
-python -m src.pipeline.run --image tests/sample.png --transcript "做成图表" --mode do --do
+python -m src.pipeline.run --image tests/sample.png --transcript "把 units 做成图表" --mode do --do
 echo
 echo "=== 3/3 expense local record ==="
 python -m src.pipeline.run --image tests/sample.png --transcript "归档报销" --mode do --do

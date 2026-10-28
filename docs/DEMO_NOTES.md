@@ -19,7 +19,7 @@
 | 步 | transcript | task_type | 写到哪里 |
 |----|------------|-----------|----------|
 | 1/3 | `回复并接受` | `draft_email` | `out/drafts/reply_YYYYMMDD_HHMMSS.md` |
-| 2/3 | `做成图表` | `make_chart` | `out/charts/chart_YYYYMMDD_HHMMSS.png` |
+| 2/3 | `把 units 做成图表` | `make_chart` | `out/charts/chart_YYYYMMDD_HHMMSS.png` |
 | 3/3 | `归档报销` | `log_record` | `out/expenses.json`（没有就新建，有则往数组末尾加一条） |
 
 结束时脚本会 `ls` 最新的草稿和 PNG，并打印 `out/expenses.json`。Mac 上第 1 步还会写 `out/drafts/open_mail_reply.applescript`。手动 `osascript out/drafts/open_mail_reply.applescript` 只是打开回复窗并填正文，脚本里没有发送。默认定时录屏不要跑这句。
@@ -40,7 +40,7 @@ mock 不读 `tests/sample_email.txt`。那封邮件是 Pass V 的 Point 目标�
 
 ### 图表 `out/charts/chart_*.png`
 
-mock 不从截图里取数。意图里没有数字实体时，Do 读取 `tests/sample_table.csv`，用第 1 列当标签、第 2 列 `units` 当柱高。第 3 列 `revenue_usd` 只在表上，不进图。
+mock 不从截图里取数。意图里没有数字实体时，Do 读取 `tests/sample_table.csv`，用第 1 列当标签、第 2 列 `units` 当柱高。第 3 列 `revenue_usd` 留在表上。`./demo.sh` 的口播是 `把 units 做成图表`（英文 `Chart the units column.`），点名 units，因为意图里若同时有两列数字，Do 会把每个数字实体都画上。
 
 六根柱：Notebook 420、Pens 180、Lamp 95、Chair 64、Monitor 48、Headset 210。静帧 [demo_chart.png](demo_chart.png) 就是这张表生成的图。
 

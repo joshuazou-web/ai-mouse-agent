@@ -54,13 +54,13 @@ python -c 'import os; print("OPENAI_API_KEY", "set" if os.getenv("OPENAI_API_KEY
 |------|-----------------|------|
 | 开场 | AI Mouse. Point, Speak, Do. | AI Mouse。指哪，说哪，做哪。 |
 | 邮件 | `Reply and accept.` | `回复并接受` |
-| 图表 | `Make a chart.` | `做成图表` |
+| 图表 | `Chart the units column.` | `把 units 做成图表` |
 | 收据 | `Archive this expense.` | `归档报销` |
 | 收尾 | Draft, chart, local record. You send. | 草稿，图表，本地记录。发送留给人。 |
 
 `./demo.sh` 内写死的是中文三句。英文成片不要直接录 `./demo.sh` 的滚屏，改用下面 Pass 里的英文命令。中文成片可以录 `./demo.sh`。
 
-路由就认这些词（大小写不敏感）：邮件 `回复|接受|reply|accept`；图表 `图表|做成图|chart|graph`；报销 `报销|归档|收据|账单|expense|receipt`。换句式之前先在镜头外跑一遍，确认 `task_type` 分别是 `draft_email`、`make_chart`、`log_record`。
+路由就认这些词（大小写不敏感）：邮件 `回复|接受|reply|accept`；图表 `图表|做成图|chart|graph`；报销 `报销|归档|收据|账单|expense|receipt`。图表这句写成 `Chart the units column.` / `把 units 做成图表`，是为了点名 `units` 列，同时仍含 `chart` / `图表`，mock 会进 `make_chart`。换句式之前先在镜头外跑一遍，确认 `task_type` 分别是 `draft_email`、`make_chart`、`log_record`。
 
 ---
 
@@ -98,17 +98,17 @@ python -m src.pipeline.run --image tests/sample.png --transcript "回复并接�
 ### M2 图表 PNG — 0:38–1:08（30s）可今天拍
 
 - 画面：执行命令，停在 `WROTE .../out/charts/chart_*.png`，打开 PNG。柱子是 Notebook 最高、Monitor 最短。可以并排打开 `tests/sample_table.csv`，但下一句口播要跟上。
-- 口播：`Make a chart.` 或 `做成图表`。接着说：“这张图按仓库里的 sample_table.csv 画，第二列 units。不是从屏幕认出来的。”
+- 口播：`Chart the units column.` 或 `把 units 做成图表`。接着说：“这张图按仓库里的 sample_table.csv 画，第二列 units。不是从屏幕认出来的。”
 - 命令（英文）：
 
 ```bash
-python -m src.pipeline.run --image tests/sample.png --transcript "Make a chart." --mode do --do
+python -m src.pipeline.run --image tests/sample.png --transcript "Chart the units column." --mode do --do
 ```
 
 - 命令（中文，与 `./demo.sh` 第 2 步相同）：
 
 ```bash
-python -m src.pipeline.run --image tests/sample.png --transcript "做成图表" --mode do --do
+python -m src.pipeline.run --image tests/sample.png --transcript "把 units 做成图表" --mode do --do
 ```
 
 - 今天就能给观众看的是真实 PNG 文件。数据来源是 CSV，不是占位图。`revenue_usd` 列留在表上，图里没有这列。
@@ -182,14 +182,14 @@ python -m src.pipeline.run --image /tmp/email_region.png --transcript "Reply and
 - 期望：`task_type` 为 `draft_email`，`proposed_action.auto_send` 为 `false`，`source` 为 `vision_llm`。草稿主题接近 `Re: Thursday design review — please accept`，正文是接受周四评审的回复。有 sender 实体时问候会带上 Priya。文件头仍是 `NOT sent`。
 - 这条若仍是 `source: mock` 或主题仍是 `Re: your request`：停，不要把这条剪进 Pass V。
 
-### V2 指表格，说做成图表 — 1:00–1:45（45s）需要真实 vision
+### V2 指表格，说把 units 做成图表 — 1:00–1:45（45s）需要真实 vision
 
 1. **Point（1:00–1:12）** 全屏 `tests/sample_table.csv`。六行产品，第二列 `units`（Notebook 420 … Monitor 48），第三列 `revenue_usd` 留在表上。
-2. **Speak（1:12–1:20）** `Make a chart.` 或 `做成图表`。
+2. **Speak（1:12–1:20）** `Chart the units column.` 或 `把 units 做成图表`。点名 units：表上还有 `revenue_usd`，Do 会把意图里的每个数字实体都画出来。
 3. **Do（1:20–1:45）** 打开 `out/charts/chart_*.png`，和表格并排。
 
 ```bash
-python -m src.pipeline.run --image /tmp/table_region.png --transcript "Make a chart." --mode do --do
+python -m src.pipeline.run --image /tmp/table_region.png --transcript "Chart the units column." --mode do --do
 ```
 
 - 期望：柱高跟屏幕上的 **units** 一致（Notebook 最高，Monitor 最短）。图是本地 PNG，没有上传。
@@ -222,7 +222,7 @@ python -m src.pipeline.run --image /tmp/receipt_region.png --transcript "Archive
 | 任务 | `./demo.sh`（中文，mock，Linux 可用） | 英文 transcript（把最后的句号保留，与口播一致） |
 |------|--------------------------------------|--------------------------------------------------|
 | 邮件 | `--transcript "回复并接受"` | `--transcript "Reply and accept."` |
-| 图表 | `--transcript "做成图表"` | `--transcript "Make a chart."` |
+| 图表 | `--transcript "把 units 做成图表"` | `--transcript "Chart the units column."` |
 | 报销 | `--transcript "归档报销"` | `--transcript "Archive this expense."` |
 
 三条都要带 `--mode do --do`。Pass M 的 `--image` 固定 `tests/sample.png`。Pass V 换成该镜头的选区图；Mac 真框选时省略 `--image`。

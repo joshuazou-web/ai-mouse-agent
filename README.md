@@ -64,7 +64,7 @@ Speak 的产品入口是电脑麦克风，硬件板载麦可选。当前仓库�
 无需任何 API key，mock 路由即可产出真实产物到 `out/`：
 ```bash
 python -m src.pipeline.run --image tests/sample.png --transcript "回复并接受" --mode do --do   # out/drafts/reply_*.md (+ Mac: open_mail_reply.applescript)
-python -m src.pipeline.run --image tests/sample.png --transcript "做成图表" --mode do --do     # out/charts/chart_*.png (tests/sample_table.csv 的 units 列)
+python -m src.pipeline.run --image tests/sample.png --transcript "把 units 做成图表" --mode do --do     # out/charts/chart_*.png (tests/sample_table.csv 的 units 列)
 python -m src.pipeline.run --image tests/sample.png --transcript "归档报销" --mode do --do     # 追加到 out/expenses.json（mock 行是占位金额）
 ```
 - `auto_send` 不为 `false` 或未知 task_type 时 Do 直接拒绝（退出码 2）。
@@ -76,5 +76,5 @@ python -m src.pipeline.run --image tests/sample.png --transcript "归档报销" 
 
 ```bash
 # mock：框选/区域截图入口 → 同一 Do
-python -m src.pipeline.run --image tests/sample.png --entry capture_region --transcript "做成图表" --mode do --do
+python -m src.pipeline.run --image tests/sample.png --entry capture_region --transcript "把 units 做成图表" --mode do --do
 ```
